@@ -1,0 +1,121 @@
+<header
+  [@navContainer]
+  [@stickyHeaderState]="isHeaderStuck ? 'stuck' : 'idle'"
+  class="sticky top-0 z-50 w-full bg-white transition-all duration-300"
+>
+  <!-- Upper Nav -->
+  <div class="w-full" @upperNavEnter>
+    <app-upper-nav [motto]="upperNavMotto" [address]="upperNavAddress" [value]="20" />
+  </div>
+
+  <!-- Main Nav Bar -->
+  <div class="w-full bg-white border-b border-[#dfe7eb]" @mainNavEnter>
+    <div class="main-nav-container max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-10 h-[76px] flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center gap-3 no-underline cursor-pointer group select-none">
+        <img
+          src="young-researcher-logo.jpeg"
+          alt="Young Researcher Academy Logo"
+          class="h-11 w-11 object-contain rounded"
+        />
+        <div class="flex flex-col justify-center leading-none">
+          <span class="font-bold text-[18px] text-[#1f2933] tracking-tight">
+            Young Researcher
+          </span>
+          <span class="font-bold text-[18px] text-[#ff861b] tracking-tight mt-[3px]">
+            Academy
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="hidden lg:flex items-center gap-7 xl:gap-8 list-none m-0 p-0" @linkRow>
+        @for (link of navLinks; track link.name) {
+          <li class="nav-link-item" [@navLink]="link.path">
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active-nav-link"
+              class="nav-anchor"
+              [@navLinkTapState]="linkTapState(link.path)"
+              (click)="onLinkTap(link.path)"
+            >
+              {{ link.name }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="hidden lg:flex items-center gap-3.5" @linkRow>
+        <div class="nav-link-item" [@navLink]="'btn-login'">
+          <app-button
+            buttonType="white"
+            buttonText="Login"
+            (Navclick)="navigateToLogin()"
+          />
+        </div>
+        <div class="nav-link-item" [@navLink]="'btn-join'">
+          <app-button
+            buttonType="orange"
+            buttonText="Join YRA"
+            (Navclick)="clickChildButton('Join YRA')"
+          />
+        </div>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <div class="flex lg:hidden items-center">
+        <button
+          type="button"
+          class="hamburger-btn"
+          (click)="toggleMobileMenu()"
+          [attr.aria-expanded]="mobileMenuOpen"
+          aria-label="Toggle Navigation Menu"
+        >
+          <span class="hamburger-line" [class.open-1]="mobileMenuOpen"></span>
+          <span class="hamburger-line" [class.open-2]="mobileMenuOpen"></span>
+          <span class="hamburger-line" [class.open-3]="mobileMenuOpen"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div
+    class="lg:hidden w-full bg-white border-b border-[#dfe7eb] overflow-hidden"
+    [@mobileNavState]="mobileMenuOpen ? 'open' : 'closed'"
+  >
+    <div class="px-6 py-5 flex flex-col gap-4">
+      <ul class="flex flex-col gap-3 list-none m-0 p-0">
+        @for (link of navLinks; track link.name) {
+          <li [@navLinkMobile]="mobileMenuOpen ? 'in' : 'out'">
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active-nav-link"
+              class="block py-2 text-[15px] font-semibold text-[#3b4851] hover:text-[#4184a2] transition-colors"
+              (click)="onLinkTap(link.path)"
+            >
+              {{ link.name }}
+            </a>
+          </li>
+        }
+      </ul>
+      <div class="flex flex-col sm:flex-row gap-3 pt-3 border-t border-[#dfe7eb]">
+        <app-button
+          buttonType="white"
+          buttonText="Login"
+          customClass="w-full justify-center"
+          (Navclick)="navigateToLogin()"
+        />
+        <app-button
+          buttonType="orange"
+          buttonText="Join YRA"
+          customClass="w-full justify-center"
+          (Navclick)="clickChildButton('Join YRA')"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+

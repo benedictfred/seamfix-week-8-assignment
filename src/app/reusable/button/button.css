@@ -1,0 +1,73 @@
+.yra-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 10px 22px;
+  min-height: 42px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  border: 1.5px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.yra-btn:focus-visible {
+  outline: 2px solid var(--color-brand-teal, #4184a2);
+  outline-offset: 2px;
+}
+
+.whiteBgButton {
+  background-color: #ffffff;
+  color: #4184a2;
+  border-color: #4184a2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.whiteBgButton:hover:not(:disabled) {
+  background-color: #f0f7fa;
+  color: #35728d;
+  border-color: #35728d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(65, 132, 162, 0.12);
+}
+
+.whiteBgButton:active:not(:disabled) {
+  transform: scale(0.98) translateY(0);
+  background-color: #e5f1f6;
+}
+
+.orangeButton {
+  background-color: #ef8c3b;
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(239, 140, 59, 0.35);
+}
+
+.orangeButton:hover:not(:disabled) {
+  background-color: #e27a27;
+  box-shadow: 0 6px 18px rgba(239, 140, 59, 0.45);
+  transform: translateY(-1px);
+}
+
+.orangeButton:active:not(:disabled) {
+  transform: scale(0.98) translateY(0);
+  box-shadow: 0 2px 8px rgba(239, 140, 59, 0.3);
+}
+
+.btn-disabled,
+.yra-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none !important;
+  transform: none !important;
+}
+

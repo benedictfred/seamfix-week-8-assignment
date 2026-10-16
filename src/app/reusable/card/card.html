@@ -1,0 +1,95 @@
+<div
+  class="yra-card"
+  [class]="customClass()"
+  [class.framework-card]="cardType() === 'framework'"
+  [class.event-card]="cardType() === 'event'"
+  [class.resource-card]="cardType() === 'resource'"
+  (click)="onCardClick()"
+>
+  <!-- Event Top Banner -->
+  @if (cardType() === 'event' && bannerText()) {
+    <div
+      class="card-event-banner"
+      [style.background-color]="bannerBgColor() || (badgeColor() === 'orange' ? '#f1a257' : '#61a3bc')"
+    >
+      <span class="card-event-banner-text">{{ bannerText() }}</span>
+    </div>
+  }
+
+  <div class="card-inner-content" [class.event-inner-content]="cardType() === 'event'">
+    <!-- Top Badge / Icon Letter for Framework and Resource cards -->
+    @if (badgeLetter()) {
+      <div
+        class="card-badge"
+        [class.badge-teal]="badgeColor() === 'teal'"
+        [class.badge-orange]="badgeColor() === 'orange'"
+      >
+        {{ badgeLetter() }}
+      </div>
+    }
+
+    <!-- Event Tag Pill (e.g. TRAINING, SEMINAR, WORKSHOP) -->
+    @if (badgeText()) {
+      <div class="card-tag-wrapper">
+        <span
+          class="card-tag-pill"
+          [class.pill-teal]="badgeColor() === 'teal'"
+          [class.pill-orange]="badgeColor() === 'orange'"
+        >
+          {{ badgeText() }}
+        </span>
+      </div>
+    }
+
+    <!-- Title -->
+    @if (title()) {
+      <h3
+        class="card-title"
+        [class.event-title]="cardType() === 'event'"
+        [class.resource-title]="cardType() === 'resource'"
+      >
+        {{ title() }}
+      </h3>
+    }
+
+    <!-- Event Meta Info (e.g. 20 Aug · Online · 4 Weeks) -->
+    @if (metaText()) {
+      <p class="card-meta">{{ metaText() }}</p>
+    }
+
+    <!-- Description -->
+    @if (description()) {
+      <p class="card-description">{{ description() }}</p>
+    }
+
+    <!-- Action Link -->
+    @if (linkText()) {
+      <a
+        [routerLink]="linkUrl() || null"
+        class="card-link"
+        (click)="onLinkClick($event)"
+      >
+        <span>{{ linkText() }}</span>
+      </a>
+    }
+
+    <!-- Action Button (for resource cards or any card with button) -->
+    @if (buttonText()) {
+      <div class="card-btn-wrapper">
+        <app-button
+          [buttonText]="buttonText()"
+          [buttonType]="buttonType() || (badgeColor() === 'orange' ? 'orange' : 'white')"
+          (btnClick)="onButtonClick($event)"
+        />
+      </div>
+    }
+
+    <ng-content />
+  </div>
+
+  <!-- Decorative Corner Shape for Framework cards -->
+  @if (cardType() === 'framework') {
+    <div class="card-corner-shape" aria-hidden="true"></div>
+  }
+</div>
+

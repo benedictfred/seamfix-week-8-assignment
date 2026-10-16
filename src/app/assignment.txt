@@ -1,0 +1,9 @@
+Requirements
+1. Clone our class exercise repo: https://github.com/Pastorkid/cohort-8-classExercise.git and cd to
+component-communication and using the preview.html file from above
+
+Complete and filling the gaps of all the missing component in the home page component in
+our class exercise as it ought to be in the provided designed above
+Your solution must be properly demonstrated by input() and output() signal flow; all button
+communication should be achieved by the @Input() and @Output()
+decorator.

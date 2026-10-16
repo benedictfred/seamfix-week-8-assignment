@@ -1,0 +1,19 @@
+<button
+  [type]="type"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel || buttonText || null"
+  class="yra-btn"
+  [ngClass]="{
+    'whiteBgButton': isWhite,
+    'orangeButton': isOrange,
+    'btn-disabled': disabled
+  }"
+  [class]="customClass"
+  (click)="onClick($event)"
+>
+  @if (buttonText) {
+    <span>{{ buttonText }}</span>
+  }
+  <ng-content />
+</button>
+
